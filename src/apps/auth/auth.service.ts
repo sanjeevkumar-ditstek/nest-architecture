@@ -21,6 +21,7 @@ export class AuthService {
     @InjectModel(User) private userRepository: typeof User,
     private jwtService: JwtService,
     // private readonly googleStrategy: GoogleStrategy,
+    // getghhjhghg
   ) {}
 
   async register(
