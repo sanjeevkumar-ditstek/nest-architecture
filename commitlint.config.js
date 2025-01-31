@@ -10,5 +10,4 @@ module.exports = {
     'type-empty': [2, 'never'], // Type should not be empty
     'subject-empty': [2, 'never'], // Subject should not be empty
   },
-  
 };
