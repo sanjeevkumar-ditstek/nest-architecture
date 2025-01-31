@@ -16,7 +16,6 @@ const sequelize = new Sequelize(
     models: [Permission, User, Role, UserRole],
   },
 );
-
 // Function to hash passwords
 const hashPassword = async (password: string): Promise<string> => {
   const saltRounds = 10;

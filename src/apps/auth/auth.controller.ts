@@ -18,10 +18,7 @@ import {
   ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  loginSchema,
-  createSchema,
-} from './schema/register.schema';
+import { loginSchema, createSchema } from './schema/register.schema';
 import { YupValidationPipe } from 'src/common/validations/yup-validation.pipe';
 import { AuthGuard } from '../../common/authgaurd/authentication';
 import { Query } from '@nestjs/common';

@@ -26,7 +26,7 @@ export class PermissionService {
     @InjectModel(User) private UserRepository: typeof User,
     @InjectModel(Role) private RoleRepository: typeof Role,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   async createPermission(
     createpermissionnRequest: createPermssionRequest,

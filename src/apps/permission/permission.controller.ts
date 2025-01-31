@@ -55,7 +55,7 @@ export class PermissionController {
   @ApiOperation({ summary: 'Soft delete a user' })
   @ApiResponse({ status: 200, description: 'User soft deleted successfully' })
   @ApiResponse({ status: 400, description: 'Bad request' })
-    async softDeleteUser(@Param('id') id: string) {
+  async softDeleteUser(@Param('id') id: string) {
     return await this.permissionService.softDeletePermission(id);
   }
 

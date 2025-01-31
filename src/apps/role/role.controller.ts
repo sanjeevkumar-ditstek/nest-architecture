@@ -11,9 +11,7 @@ import {
 import { RoleService } from './role.service';
 import { CreateRoleDto, UpdateRoleDto } from '../auth/dto/create-user.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import {
-  createRoleSchema,
-} from './schema/role.schema';
+import { createRoleSchema } from './schema/role.schema';
 import { YupValidationPipe } from 'src/common/validations/yup-validation.pipe';
 import { Query } from '@nestjs/common';
 import { FindUserDto } from './dto/find-role.dto';
