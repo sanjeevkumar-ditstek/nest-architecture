@@ -82,53 +82,11 @@ Check out a few resources that may come in handy when working with NestJs:
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
 - Visit [NodeJs Documentaion](https://nodejs.org/en/download/package-manager) to learn more about the nodejs
 - Visit [MonogDB Documentaion](https://www.mongodb.com/)to learn more about the MonogDB
+- Visit [MySql Documentaion](https://dev.mysql.com/doc/refman/8.4/en/introduction.html) to learn more about MySQL
+- Visit [PostgreSQL](https://www.postgresql.org/)to learn more about the PostgresSQL.
+- 
 
 
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Structure
-```bash
-my-node-app/
-├── .husky                          # Pre-commit hooks for code validation (Husky)
-├── src
-│   ├── apps/                       
-│   │   ├── auth                    # Authentication module
-│   │   │   ├── dto                 # Data transfer objects for authentication
-│   │   ├── user                    # User module
-│   │   │   ├── dto                 # Data transfer objects for user management
-│   │   │   ├── interface           # User-related interfaces
-│   │   │   ├── validation          # Validation logic for user data
-│   ├── common/                     
-│   │   ├── enums                   # Shared enums across the app
-│   │   ├── guards                  # Security guards for route protection
-│   │   ├── interceptor             # Interceptor logic
-│   │   ├── interfaces              # Common interfaces used throughout the app
-│   │   ├── logger                  # Logger configuration and setup
-│   │   ├── validations             # Shared validation logic
-│   ├── config/                     
-│   │   ├── index.ts                # Main configuration entry point
-│   │   ├── validations             # Configuration validations
-│   ├── db/                         
-│   │   ├── migrations              # Database migrations
-│   │   ├── schemas                 # Database schemas
-│   │   ├── seeders                 # Database seeders for initial data
-│   ├── utils/                      
-│   │   ├── email                   # Email-related utilities
-│   │   ├── sms                     # SMS-related utilities
-│   │   ├── upload                  # File upload-related utilities
-│   │   ├── time.ts                 # Time and date utilities
-│   ├── public/                     # Static files served by the app
-│   ├── tests/                      # Unit and integration tests
-│   ├── app.ts                      # Main application entry point
-│   ├── .env                        # Environment variables
-├── package.json                    # Project dependencies and scripts
-├── tsconfig.json                   # TypeScript configuration
-├── eslint.json                     # Linter configuration (ESLint and Prettier)
-├── .prettierrc                     # Code formatting rules (Prettier)
-├── commitlint.config.js            # Commit message linting for semantic versioning
-├── Dockerfile                      # Dockerfile for containerization
-├── docker-compose.yml              # Docker Compose for multi-container setup
-├── README.md                       # Project overview and documentation
-```
