@@ -28,54 +28,7 @@
 
 NestJS is a framework for building efficient, scalable Node.js server-side applications. It leverages progressive JavaScript and is built with TypeScript, fully supporting developers who prefer pure JavaScript. The framework combines principles of Object-Oriented Programming (OOP), Functional Programming (FP), and Functional Reactive Programming (FRP) to create robust and maintainable applications.
 
-## Prerequisites
 
-Before you begin, ensure you have the following installed:
-
-- **Node.js** (version 14 or later)
-- **NestJS CLI**
-- **Mongo-migration** (for database migrations)
-- **MongoDB**
-- **npm** (Node Package Manager)
-
-
-## Project setup
-
-```bash
-$ npm install
-```
-
-## Database Setup
-
-```bash
-$ npm run migrate:up  # to migrate the tables/collection in the database
-```
-
-```bash
-$ npm run migrate:down  # to undo the mirgration (delete  the tables/collection) from the database
-```
-
-```bash
-$ npm run seed  # to seed(populate) data in the database
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm  start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run project using docker
-```bash
-$ docker-compose up
-```
 
 ## Resources
 Check out a few resources that may come in handy when working with NestJs:
