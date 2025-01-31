@@ -1,0 +1,19 @@
+import { Column, DataType, Model } from 'sequelize-typescript';
+
+export abstract class BaseModel extends Model {
+  //   @ApiProperty({ description: 'created at' })
+  @Column({
+    type: DataType.BIGINT,
+    allowNull: true,
+    defaultValue: () => new Date().getTime(),
+  })
+  createdAt: number;
+
+  //   @ApiProperty({ description: 'updated at' })
+  @Column({
+    type: DataType.BIGINT,
+    allowNull: true,
+    defaultValue: () => new Date().getTime(),
+  })
+  updatedAt: number;
+}
