@@ -1,0 +1,21 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "Qwerty!@1234",
+    "database": "nest_typeorm",
+    "synchronize": false,
+    "logging": true,
+    "entities": [
+      "src/schemas/**/*.ts"
+    ],
+    "migrations": [
+      "src/migration/**/*.ts"
+    ],
+    "cli": {
+      "entitiesDir": "src/schemas",
+      "migrationsDir": "src/migration"
+    }
+  }
+  
