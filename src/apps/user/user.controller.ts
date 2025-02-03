@@ -30,7 +30,7 @@ export class UserController {
   @Post('add-product')
   @SetMetadata('module', Modules.Order)
   @SetMetadata('roles', [Roles.ADMIN])
-  @SetMetadata('permissions', [Permissions.READ,Permissions.CREATE])
+  @SetMetadata('permissions', [Permissions.READ, Permissions.CREATE])
   addProductV1(@Body() body: { productName: string }) {
     return { message: `Product ${body.productName} added successfully V1` };
   }
@@ -56,7 +56,7 @@ export class UserController {
 
   // SEND-MESSAGE TEST ROUTE
   @Post('send-msg')
-  @SetMetadata('roles', [ Roles.USER])
+  @SetMetadata('roles', [Roles.USER])
   async sendMessage(@Body() body: { to: string; message: string }) {
     return this.smsService.sendSms(body.to, body.message);
   }

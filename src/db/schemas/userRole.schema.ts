@@ -84,7 +84,9 @@ export class UserRole extends BaseEntity {
   @JoinColumn({ name: 'roleId' })
   role: Role;
 
-  @ManyToOne(() => Permission, (permission) => permission.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Permission, (permission) => permission.id, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'permissionId' })
   permission: Permission;
 

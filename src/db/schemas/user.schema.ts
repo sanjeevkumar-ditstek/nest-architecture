@@ -52,7 +52,6 @@
 //   userRoles: UserRole[];
 // }
 
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -65,7 +64,7 @@ import {
 import { UserRole } from './userRole.schema';
 
 @Entity('users')
-export class User extends BaseEntity{
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -89,4 +88,4 @@ export class User extends BaseEntity{
 
   @OneToMany(() => UserRole, (userRole) => userRole.user)
   userRoles: UserRole[];
- }
+}

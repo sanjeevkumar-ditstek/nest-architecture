@@ -129,7 +129,6 @@
 
 // seedDatabase();
 
-
 import { DataSource } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { hash } from 'bcrypt';
@@ -179,20 +178,67 @@ const seedDatabase = async () => {
     const roles = await entityManager.save(Role, rolesData);
 
     const usersData = [
-      { id: uuidv4(), email: 'superadmin@example.com', password: await hashPassword('superadmin_password') },
-      { id: uuidv4(), email: 'admin@example.com', password: await hashPassword('admin_password') },
-      { id: uuidv4(), email: 'user@example.com', password: await hashPassword('user_password') },
+      {
+        id: uuidv4(),
+        email: 'superadmin@example.com',
+        password: await hashPassword('superadmin_password'),
+      },
+      {
+        id: uuidv4(),
+        email: 'admin@example.com',
+        password: await hashPassword('admin_password'),
+      },
+      {
+        id: uuidv4(),
+        email: 'user@example.com',
+        password: await hashPassword('user_password'),
+      },
     ];
     const users = await entityManager.save(User, usersData);
 
     const userRolesData = [
-      { id: uuidv4(), user: users[0], role: roles[0], permission: permissions[0] },
-      { id: uuidv4(), user: users[0], role: roles[0], permission: permissions[2] },
-      { id: uuidv4(), user: users[0], role: roles[0], permission: permissions[1] },
-      { id: uuidv4(), user: users[1], role: roles[1], permission: permissions[1] },
-      { id: uuidv4(), user: users[1], role: roles[1], permission: permissions[0] },
-      { id: uuidv4(), user: users[1], role: roles[1], permission: permissions[3] },
-      { id: uuidv4(), user: users[2], role: roles[2], permission: permissions[1] },
+      {
+        id: uuidv4(),
+        user: users[0],
+        role: roles[0],
+        permission: permissions[0],
+      },
+      {
+        id: uuidv4(),
+        user: users[0],
+        role: roles[0],
+        permission: permissions[2],
+      },
+      {
+        id: uuidv4(),
+        user: users[0],
+        role: roles[0],
+        permission: permissions[1],
+      },
+      {
+        id: uuidv4(),
+        user: users[1],
+        role: roles[1],
+        permission: permissions[1],
+      },
+      {
+        id: uuidv4(),
+        user: users[1],
+        role: roles[1],
+        permission: permissions[0],
+      },
+      {
+        id: uuidv4(),
+        user: users[1],
+        role: roles[1],
+        permission: permissions[3],
+      },
+      {
+        id: uuidv4(),
+        user: users[2],
+        role: roles[2],
+        permission: permissions[1],
+      },
     ];
     await entityManager.save(UserRole, userRolesData);
 

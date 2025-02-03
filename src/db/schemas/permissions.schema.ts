@@ -29,7 +29,6 @@
 //   isDeleted!: boolean;
 // }
 
-
 import { UUID, UUIDV4 } from 'sequelize';
 import {
   Entity,
@@ -41,9 +40,8 @@ import {
   BaseEntity,
 } from 'typeorm';
 
-
 @Entity('permissions')
-export class Permission extends BaseEntity{
+export class Permission extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

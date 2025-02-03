@@ -49,7 +49,7 @@ import {
 } from 'typeorm';
 
 @Entity('roles')
-export class Role extends BaseEntity{
+export class Role extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

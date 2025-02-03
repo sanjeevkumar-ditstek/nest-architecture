@@ -254,31 +254,41 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(createUserRequest: createUserRequest): Promise<User | { message: string }> {
+  async register(
+    createUserRequest: createUserRequest,
+  ): Promise<User | { message: string }> {
     try {
       const { userName, email, password } = createUserRequest;
-      const existingUser = await this.userRepository.findOne({where:{email}});
+      const existingUser = await this.userRepository.findOne({
+        where: { email },
+      });
       if (existingUser) {
         return { message: ResponseMessage.userAlreadyExist };
       }
-      
+
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = this.userRepository.create({ email, password: hashedPassword, userName });
+      const user = this.userRepository.create({
+        email,
+        password: hashedPassword,
+        userName,
+      });
       await this.userRepository.save(user);
       logger.info('User successfully created');
-      return user;}
-     catch (error) {
+      return user;
+    } catch (error) {
       logger.error(ResponseMessage.failedToCreateGroup, error.stack);
       throw new BadRequestException('Error registering user');
     }
   }
 
-  async login(loginRequest: loginRequest): Promise<loginResponse|{ message: string }> {
+  async login(
+    loginRequest: loginRequest,
+  ): Promise<loginResponse | { message: string }> {
     try {
       const { email, password } = loginRequest;
       const user = await this.userRepository.findOne({ where: { email } });
       if (!user) {
-        return {message:ResponseMessage.INVALID_CREDENTIALS};
+        return { message: ResponseMessage.INVALID_CREDENTIALS };
       }
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
@@ -300,9 +310,9 @@ export class AuthService {
   //       console.log(user,"user")
   //     return {message:ResponseMessage.userNotFound};
   //     }
-    
+
   // //  const update= await this.userRepository.update(id ,updateUserDto);
-  // //  return { message: ResponseMessage.userUpdated}; 
+  // //  return { message: ResponseMessage.userUpdated};
   // await this.userRepository.save({...user,...updateUserDto})
   // return user
   //   } catch (error) {
@@ -315,25 +325,24 @@ export class AuthService {
     try {
       const user = await this.userRepository.findOne({ where: { id } });
       if (!user) {
-        console.log(user, "user");
+        console.log(user, 'user');
         return { message: ResponseMessage.userNotFound };
       }
-  
+
       await this.userRepository.update(id, updateUserDto);
-  
-      return { message: ResponseMessage.userUpdated }; 
+
+      return { message: ResponseMessage.userUpdated };
     } catch (error) {
       logger.error(ResponseMessage.failedToUpdateUser, error.stack);
       throw new BadRequestException(ResponseMessage.failedToUpdateUser);
     }
   }
-  
 
   async softDeleteUser(id: string): Promise<any> {
     try {
       const user = await this.userRepository.findOne({ where: { id } });
       if (!user) {
-        return {message:ResponseMessage.userNotFound};
+        return { message: ResponseMessage.userNotFound };
       }
       user.isDeleted = true;
       await this.userRepository.save(user);
@@ -350,7 +359,9 @@ export class AuthService {
 
   async getUserById(id: string): Promise<User> {
     try {
-      const user = await this.userRepository.findOne({ where: { id, isDeleted: false } });
+      const user = await this.userRepository.findOne({
+        where: { id, isDeleted: false },
+      });
       if (!user) {
         throw new BadRequestException(ResponseMessage.userNotFound);
       }
@@ -402,24 +413,24 @@ export class AuthService {
   //       pageNumber = 1,
   //       pageSize = 10,
   //     } = query;
-  
+
   //     const limit = Number(pageSize); // Convert page size to a number
   //     const offset = (Number(pageNumber) - 1) * limit; // Calculate offset based on page number
-  
+
   //     // Base where condition for non-deleted users
   //     const condition: any = { isDeleted: false };
-  
+
   //     // Dynamic search: Allow search across multiple fields
   //     const queryBuilder = this.userRepository.createQueryBuilder('user')
   //       .where('user.isDeleted = :isDeleted', { isDeleted: false });
-  
+
   //     if (search) {
   //       queryBuilder.andWhere(
   //         '(user.email LIKE :search OR user.UserName LIKE :search)',
   //         { search: `%${search}%` }
   //       );
   //     }
-  
+
   //     // Handle dynamic filters
   //     Object.entries(filters || {}).forEach(([key, value]) => {
   //       if (value !== undefined && value !== null && value !== '') {
@@ -434,18 +445,18 @@ export class AuthService {
   //         }
   //       }
   //     });
-  
+
   //     // Sort order
   //     const order = sort === 'Desc' ? 'DESC' : 'ASC';
   //     queryBuilder.orderBy('user.createdAt', order);
-  
+
   //     // Pagination
   //     queryBuilder.skip(offset).take(limit);
-  
+
   //     // Fetch users
   //     const [users, totalUsers] = await queryBuilder.getManyAndCount();
   //     console.log(users,"users")
-  
+
   //     // Return response with pagination details
   //     return {
   //       statusCode: StatusCodeEnum.OK,
@@ -463,7 +474,7 @@ export class AuthService {
   //     // throw new InternalServerErrorException('Failed to fetch users');
   //   }
   // }
-  
+
   async getUsers(query: FindUserDto): Promise<any> {
     try {
       const {
@@ -473,16 +484,16 @@ export class AuthService {
         pageNumber = 1,
         pageSize = 10,
       } = query;
-  
+
       const limit = Number(pageSize);
       const offset = (Number(pageNumber) - 1) * limit;
-  
+
       const condition: any = { isDeleted: false };
-  
+
       if (search) {
         condition.action = { $like: `%${search}%` };
       }
-  
+
       const parsedFilters = filters || {};
       Object.entries(parsedFilters).forEach(([key, value]) => {
         if (value === undefined || value === null || value === '') {
@@ -490,16 +501,16 @@ export class AuthService {
         }
         condition[key] = value;
       });
-  
+
       const order = sort === 'Desc' ? 'DESC' : 'ASC';
-  
+
       const [users, totalPermissions] = await this.userRepository.findAndCount({
         where: condition,
         take: limit,
         skip: offset,
         // order: { createdAt: order },
       });
-  
+
       return {
         users,
         totalPermissions,

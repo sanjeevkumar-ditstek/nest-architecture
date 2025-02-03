@@ -59,7 +59,6 @@ import { AuthModule } from './apps/auth/auth.module';
 import { RoleModule } from './apps/role/role.module';
 import { UserModule } from './apps/user/user.module';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -67,13 +66,13 @@ import { UserModule } from './apps/user/user.module';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'mysql', // or 'postgres', 'sqlite', etc.
-        host: String(configService.get('DB_HOST')),  // Ensure host is a string
-        port: Number(configService.get('DB_PORT')),  // Ensure port is a number
-        username: String(configService.get('DB_USERNAME')),  // Ensure username is a string
-        password: String(configService.get('DB_PASSWORD')),  // Ensure password is a string
-        database: String(configService.get('DB_DATABASE')),  // Ensure database is a string
-        entities: [User, Permission, Role, UserRole],  // Pass your entities here
-        synchronize: true,  // Set to false in production
+        host: String(configService.get('DB_HOST')), // Ensure host is a string
+        port: Number(configService.get('DB_PORT')), // Ensure port is a number
+        username: String(configService.get('DB_USERNAME')), // Ensure username is a string
+        password: String(configService.get('DB_PASSWORD')), // Ensure password is a string
+        database: String(configService.get('DB_DATABASE')), // Ensure database is a string
+        entities: [User, Permission, Role, UserRole], // Pass your entities here
+        synchronize: true, // Set to false in production
       }),
     }),
     EmailModule,

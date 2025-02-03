@@ -18,10 +18,7 @@ import {
   ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  loginSchema,
-  createSchema,
-} from './schema/register.schema';
+import { loginSchema, createSchema } from './schema/register.schema';
 import { YupValidationPipe } from 'src/common/validations/yup-validation.pipe';
 import { AuthGuard } from '../../common/authgaurd/authentication';
 import { Query } from '@nestjs/common';
@@ -67,7 +64,7 @@ export class AuthController {
     @Body() updateUserDto: UpdateUserDto,
     @Param('id') id: string,
   ) {
-    console.log("dxfhokpl")
+    console.log('dxfhokpl');
     return this.authService.updateUser(id, updateUserDto);
   }
   // @UseGuards(AuthGuard)

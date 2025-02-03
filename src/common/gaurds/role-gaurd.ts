@@ -140,8 +140,10 @@ export class RolesGuard implements CanActivate {
     private readonly reflector: Reflector,
     private readonly jwtService: JwtService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    @InjectRepository(UserRole) private readonly userRoleRepository: Repository<UserRole>,
-    @InjectRepository(Permission) private readonly permissionRepository: Repository<Permission>,
+    @InjectRepository(UserRole)
+    private readonly userRoleRepository: Repository<UserRole>,
+    @InjectRepository(Permission)
+    private readonly permissionRepository: Repository<Permission>,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -181,7 +183,10 @@ export class RolesGuard implements CanActivate {
       this.reflector.get<string[]>('roles', context.getHandler()) || [];
     const allowedPermissions =
       this.reflector.get<string[]>('permissions', context.getHandler()) || [];
-    const allowedModule = this.reflector.get<string>('module', context.getHandler());
+    const allowedModule = this.reflector.get<string>(
+      'module',
+      context.getHandler(),
+    );
 
     const userRoles = user.userRoles || [];
     const userPermissions = userRoles.flatMap(

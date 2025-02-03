@@ -170,7 +170,10 @@ import { Repository } from 'typeorm'; // Import TypeORM repository class
 import { JwtService } from '@nestjs/jwt';
 import ResponseMessage from 'src/common/enums/ResponseMessages';
 import logger from 'src/common/logger/logger.service';
-import { createRoleRequest, updateRoleResponse } from '../../common/interface/user.interface';
+import {
+  createRoleRequest,
+  updateRoleResponse,
+} from '../../common/interface/user.interface';
 import { UpdateRoleDto } from './dto/create-role.dto';
 import { FindUserDto } from './dto/find-role.dto';
 import { Role } from 'src/db/schemas/role.schema'; // Adjusted to use TypeORM entity
@@ -180,14 +183,18 @@ export class RoleService {
   constructor(
     @InjectRepository(Role) private roleRepository: Repository<Role>, // Inject TypeORM repository
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
-  async createRole(createRoleRequest: createRoleRequest): Promise<Role | { message: string }> {
+  async createRole(
+    createRoleRequest: createRoleRequest,
+  ): Promise<Role | { message: string }> {
     try {
       const { role, level } = createRoleRequest;
 
       // Check if the role already exists
-      const existingRole = await this.roleRepository.findOne({ where: { role } });
+      const existingRole = await this.roleRepository.findOne({
+        where: { role },
+      });
       if (existingRole) {
         return { message: ResponseMessage.roleAlreadyExist };
       }
@@ -215,9 +222,8 @@ export class RoleService {
       if (!role) {
         return { message: ResponseMessage.userNotFound };
       }
-      await this.roleRepository.save({ ...role, ...updateRoleDto })
-      return role
-
+      await this.roleRepository.save({ ...role, ...updateRoleDto });
+      return role;
     } catch (error) {
       logger.error(ResponseMessage.failedToUpdateRole, error.stack);
       throw new BadRequestException(ResponseMessage.failedToUpdateRole);
@@ -267,16 +273,16 @@ export class RoleService {
         pageNumber = 1,
         pageSize = 10,
       } = query;
-  
+
       const limit = Number(pageSize);
       const offset = (Number(pageNumber) - 1) * limit;
-  
+
       const condition: any = { isDeleted: false };
-  
+
       if (search) {
         condition.action = { $like: `%${search}%` };
       }
-  
+
       const parsedFilters = filters || {};
       Object.entries(parsedFilters).forEach(([key, value]) => {
         if (value === undefined || value === null || value === '') {
@@ -284,16 +290,16 @@ export class RoleService {
         }
         condition[key] = value;
       });
-  
+
       const order = sort === 'Desc' ? 'DESC' : 'ASC';
-  
+
       const [users, totalPermissions] = await this.roleRepository.findAndCount({
         where: condition,
         take: limit,
         skip: offset,
         // order: { createdAt: order },
       });
-  
+
       return {
         users,
         totalPermissions,

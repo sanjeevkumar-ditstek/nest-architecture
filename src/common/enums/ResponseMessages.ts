@@ -66,7 +66,7 @@ enum ResponseMessage {
   failedToCreateRole = 'failed to create group.',
   failedToUpdateRole = 'failed to update role',
   unsupportedSocialProvider = 'Unsupported Social Provider',
-  userUpdated='User Updated'
+  userUpdated = 'User Updated',
 }
 
 export default ResponseMessage;

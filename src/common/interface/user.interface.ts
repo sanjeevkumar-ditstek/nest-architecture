@@ -36,7 +36,6 @@ export interface loginResponse {
 export interface updateRoleResponse {
   role: string;
   level: number;
-  
 }
 
 export interface createPermssionRequest {
