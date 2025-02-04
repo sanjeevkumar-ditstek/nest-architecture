@@ -9,7 +9,10 @@ import { ConfigService } from '../../../config/config.service';
 
 @Injectable()
 export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
-  constructor(private readonly authService: AuthService, private configService: ConfigService) {
+  constructor(
+    private readonly authService: AuthService,
+    private configService: ConfigService,
+  ) {
     super({
       clientID: configService.get('APPLE_CLIENT_ID'),
       teamID: configService.get('APPLE_TEAM_ID'),
@@ -20,13 +23,19 @@ export class AppleStrategy extends PassportStrategy(Strategy, 'apple') {
     });
   }
 
-  async validate(request: any, accessToken: string, refreshToken: string, profile: Profile, done: Function) {
+  async validate(
+    request: any,
+    accessToken: string,
+    refreshToken: string,
+    profile: Profile,
+    done: Function,
+  ) {
     const { email, firstName, lastName } = profile;
 
     const user = {
       email: email,
-    //   firstName: firstName,
-    //   lastName: lastName,
+      //   firstName: firstName,
+      //   lastName: lastName,
       // Add additional fields if necessary
     };
 

@@ -78,6 +78,7 @@ const seedDatabase = async () => {
         password: 'superadmin_password', // Plaintext password
         roles: [roleResult.insertedIds[0]], // Reference to super admin role
         permissions: permissionResult.insertedIds,
+        isUserSuperAdmin: true,
       },
       {
         email: 'admin@example.com',

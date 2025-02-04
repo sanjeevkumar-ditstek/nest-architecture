@@ -1,14 +1,25 @@
-import { Controller, Get, Post, Put, Delete, Param, Body , BadRequestException} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  BadRequestException,
+  SetMetadata,
+} from '@nestjs/common';
 import { CrudService } from './crud.service';
 import { Document } from 'mongoose';
 import * as Joi from 'joi';
-
+import Roles from '../../common/enums/Roles';
+import Permissions from '../../common/enums/Permissions';
+import Modules from '../../common/enums/Modules';
 @Controller()
 export class CrudController<T extends Document> {
   constructor(
     private readonly service: CrudService<T>,
-    private readonly validationSchemas: Record<string, Joi.ObjectSchema>
-  
+    private readonly validationSchemas: Record<string, Joi.ObjectSchema>,
   ) {}
 
   @Post()
@@ -23,6 +34,8 @@ export class CrudController<T extends Document> {
   }
 
   @Get()
+  @SetMetadata('roles', [Roles.ADMIN, Roles.USER])
+  @SetMetadata('permissions', [Permissions.CREATE])
   async findAll(): Promise<T[]> {
     return this.service.findAll();
   }
@@ -41,5 +54,4 @@ export class CrudController<T extends Document> {
   async delete(@Param('id') id: string): Promise<void> {
     return this.service.delete(id);
   }
-
 }

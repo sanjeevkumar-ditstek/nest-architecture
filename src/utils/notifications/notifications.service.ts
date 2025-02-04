@@ -15,16 +15,16 @@ export class NotificationsService {
     };
     return this.firebaseService.sendToDevice(token, payload);
   }
-  
-//   async sendToMultipleDevices(tokens: string[], title: string, body: string) {
-//     const payload = {
-//       notification: {
-//         title,
-//         body,
-//       },
-//     };
-//     return this.firebaseService.sendToDevice(tokens, payload);
-//   }
+
+  //   async sendToMultipleDevices(tokens: string[], title: string, body: string) {
+  //     const payload = {
+  //       notification: {
+  //         title,
+  //         body,
+  //       },
+  //     };
+  //     return this.firebaseService.sendToDevice(tokens, payload);
+  //   }
 
   async sendToTopic(topic: string, title: string, body: string) {
     const payload = {

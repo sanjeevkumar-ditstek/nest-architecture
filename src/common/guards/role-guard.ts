@@ -3,6 +3,7 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
@@ -25,7 +26,9 @@ export class RolesGuard implements CanActivate {
     const authHeader = request.headers['authorization'];
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new Error('Authorization header is missing or invalid');
+      throw new UnauthorizedException(
+        'Authorization header is missing or invalid',
+      );
     }
 
     const token = authHeader.split(' ')[1];
@@ -34,30 +37,6 @@ export class RolesGuard implements CanActivate {
     // Fetch user data from the database
     const [user] = await this.userModel.aggregate([
       { $match: { _id: new ObjectId(decoded.sub) } },
-      // {
-      //   $lookup: {
-      //     from: 'roles',
-      //     let: { userRoles: '$roles' },
-      //     pipeline: [
-      //       { $match: { $expr: { $in: ['$_id', '$$userRoles'] } } },
-      //       {
-      //         $lookup: {
-      //           from: 'permissions',
-      //           localField: 'permissions',
-      //           foreignField: '_id',
-      //           as: 'permissionsDetails',
-      //         },
-      //       },
-      //       {
-      //         $project: {
-      //           role: 1,
-      //           permissions: '$permissionsDetails', // Adjust field based on your permission schema
-      //         },
-      //       },
-      //     ],
-      //     as: 'roleDetails',
-      //   },
-      // },
       {
         $lookup: {
           from: 'roles',
@@ -75,7 +54,6 @@ export class RolesGuard implements CanActivate {
         },
       },
     ]);
-    console.log(JSON.stringify(user));
     if (!user) {
       throw new ForbiddenException('User not found');
     }

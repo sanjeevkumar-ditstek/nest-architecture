@@ -8,7 +8,6 @@ import { Role, RoleSchema } from '../../db/schemas/role.schema';
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),
-  ]
+  ],
 })
-
 export class CrudModule {}

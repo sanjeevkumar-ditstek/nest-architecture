@@ -11,36 +11,42 @@ export class FirebaseService {
     });
   }
 
-  public async sendToDevice(token: string, payload: admin.messaging.MessagingPayload) {
-    return await admin.messaging().send ({
+  public async sendToDevice(
+    token: string,
+    payload: admin.messaging.MessagingPayload,
+  ) {
+    return await admin.messaging().send({
+      notification: {
+        title: payload.notification.title,
+        body: payload.notification.body,
+      },
+      token: token,
+      data: {},
+      android: {
+        priority: 'high',
         notification: {
-          title: payload.notification.title,
-          body: payload.notification.body,
+          sound: 'default',
+          channelId: 'default',
         },
-        token: token,
-        data: {},
-        android: {
-          priority: 'high',
-          notification: {
+      },
+      apns: {
+        headers: {
+          'apns-priority': '10',
+        },
+        payload: {
+          aps: {
+            contentAvailable: true,
             sound: 'default',
-            channelId: 'default',
           },
         },
-        apns: {
-          headers: {
-            'apns-priority': '10',
-          },
-          payload: {
-            aps: {
-              contentAvailable: true,
-              sound: 'default',
-            },
-          },
-        },
-      });
+      },
+    });
   }
 
-  public async sendToTopic(topic: string, payload: admin.messaging.MessagingPayload) {
+  public async sendToTopic(
+    topic: string,
+    payload: admin.messaging.MessagingPayload,
+  ) {
     return await admin.messaging().sendToTopic(topic, payload);
   }
 }

@@ -5,6 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { VersioningType } from '@nestjs/common';
+import { HttpExceptionFilter } from './common/interceptor/http-exception.filter';
 
 /**
  * The url endpoint for open api ui
@@ -54,7 +55,8 @@ async function bootstrap() {
   });
   // Apply Response Interceptor globally
   app.useGlobalInterceptors(new ResponseInterceptor());
-
+  // Apply global exception filter
+  app.useGlobalFilters(new HttpExceptionFilter());
   // Swagger Configuration
   const config = new DocumentBuilder()
     .setTitle(SWAGGER_API_NAME)
@@ -67,6 +69,7 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
+    prefix: 'v', // This will be used for versioning, e.g., /v1/your-route
   });
 
   await app.listen(3000);
