@@ -19,8 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migrate:generate": "npx sequelize-cli migration:generate --name create-users-table --migrations-path src/db/migrations",
+    "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:down": "ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/migrate-mongo/bin/migrate-mongo down",
-    "seed": "ts-node src/db/seeder/seeder.ts",
+    "seed": "ts-node src/db/seeders/seeder.ts",
     "prepare": "husky && husky install"
   },
   "dependencies": {

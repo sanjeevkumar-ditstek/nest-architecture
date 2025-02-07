@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsOptional, IsNumberString } from 'class-validator';
 
-export class FindUserDto {
+export class QueryParamsDTO {
   @ApiProperty({
     required: false,
     description: 'Search term for filtering users',

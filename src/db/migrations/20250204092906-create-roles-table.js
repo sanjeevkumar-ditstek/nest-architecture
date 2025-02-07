@@ -2,38 +2,30 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+  async up (queryInterface, Sequelize) {
+    /**
+     * Create the roles table with the necessary columns.
+     */
+    await queryInterface.createTable('roles', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
-      userName: {
+      role: {
         type: Sequelize.STRING,
-        allowNull: true,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true, // Ensure email is unique
-      },
-      password: {
-        type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
       },
-      isSuperAdmin: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      level: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       isDeleted: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
-      },
-      providerToken: {
-        type: Sequelize.STRING,
-        allowNull: true,
       },
       createdAt: {
         type: Sequelize.BIGINT,
@@ -48,7 +40,10 @@ module.exports = {
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
-  },
+  async down (queryInterface, Sequelize) {
+    /**
+     * Drop the roles table.
+     */
+    await queryInterface.dropTable('roles');
+  }
 };

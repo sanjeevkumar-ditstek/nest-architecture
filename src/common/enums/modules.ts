@@ -1,5 +1,4 @@
 export enum Modules {
-  PRODUCT = 'product',
-  Order = 'order',
+  USER = 'user',
 }
 export default Modules;

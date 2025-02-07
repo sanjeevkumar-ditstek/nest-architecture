@@ -62,10 +62,13 @@ enum ResponseMessage {
   permissionAlreadyExist = 'permission already exist',
   failedToCreatePermissions = 'failed to create permissioms',
   failedToUpdatePermission = 'failed to fetch permissions',
-  roleAlreadyExist = 'role already exist',
+  ROLE_ALREADY_EXIST = 'Role already exist',
   failedToCreateRole = 'failed to create group.',
   failedToUpdateRole = 'failed to update role',
   unsupportedSocialProvider = 'Unsupported Social Provider',
+  PERMISSION_ALREADY_EXIST = 'Permission already exists',
+  PERMISSION_NOT_FOUND = 'Permission not found',
+  ROLE_NOT_FOUND = 'Role not found',
 }
 
 export default ResponseMessage;

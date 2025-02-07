@@ -9,13 +9,13 @@ import Roles from '../../common/enums/role';
 import Permissions from '../../common/enums/permission';
 import { UserRole } from '../schemas/userRole.schema';
 
-const sequelize = new Sequelize(
-  'mysql://root:Qwerty!@1234@localhost:3306/nestjs_project',
-  {
-    dialect: 'mysql',
-    models: [Permission, User, Role, UserRole],
-  },
-);
+// const sequelize = new Sequelize(
+//   'mysql://root:root@localhost:3306/nestjs_project',
+//   {
+//     dialect: 'mysql',
+//     models: [Permission, User, Role, UserRole],
+//   },
+// );
 // Function to hash passwords
 const hashPassword = async (password: string): Promise<string> => {
   const saltRounds = 10;
@@ -27,14 +27,14 @@ const seedDatabase = async () => {
     console.log('Starting database seeding...');
 
     // Sync models with the database
-    await sequelize.sync({ force: true });
+    // await sequelize.sync({ force: true });
 
     // Permissions data
     const permissionsData = [
-      { id: uuidv4(), module: Modules.PRODUCT, action: Permissions.CREATE },
-      { id: uuidv4(), module: Modules.PRODUCT, action: Permissions.READ },
-      { id: uuidv4(), module: Modules.PRODUCT, action: Permissions.UPDATE },
-      { id: uuidv4(), module: Modules.PRODUCT, action: Permissions.DELETE },
+      { id: uuidv4(), module: Modules.USER, action: Permissions.CREATE },
+      { id: uuidv4(), module: Modules.USER, action: Permissions.READ },
+      { id: uuidv4(), module: Modules.USER, action: Permissions.UPDATE },
+      { id: uuidv4(), module: Modules.USER, action: Permissions.DELETE },
     ];
     const permissions = await Permission.bulkCreate(permissionsData);
     console.log('Permissions seeded:', permissions);
@@ -121,7 +121,7 @@ const seedDatabase = async () => {
   } catch (error) {
     console.error('Error during seeding:', error.message || error);
   } finally {
-    await sequelize.close();
+    // await sequelize.close();
     console.log('Database connection closed.');
   }
 };
