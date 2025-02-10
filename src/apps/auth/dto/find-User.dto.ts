@@ -65,4 +65,8 @@ export class FindUserDto {
   @IsOptional()
   @IsNumberString()
   filterBy?: number;
+
+  // @IsOptional()
+  // @IsNumberString()
+  // createdAt?: number;
 }

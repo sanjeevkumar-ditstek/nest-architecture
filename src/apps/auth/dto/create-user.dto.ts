@@ -1,14 +1,26 @@
 // import { ApiProperty } from '@nestjs/swagger';
+// export class CreateUserDto {
+//   email: string;
+//   password: string;
+//   userName: string;
+// }
+
+import Modules from "src/common/enums/modules";
+
 export class CreateUserDto {
   email: string;
   password: string;
   userName: string;
+  roleId: string;
+  permissionIds: string[];
 }
 
 export class UpdateUserDto {
   email: string;
   password: string;
   userName: string;
+  roleId: string;
+  permissionIds: string[];
 }
 
 export class CreateRoleDto {
@@ -21,7 +33,7 @@ export class UpdateRoleDto {
 }
 
 export class CreatePermissionDto {
-  module: string;
+  module: Modules
   action: string;
 }
 

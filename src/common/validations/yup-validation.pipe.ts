@@ -4,8 +4,9 @@ import {
   ArgumentMetadata,
   BadRequestException,
 } from '@nestjs/common';
-import { Schema, ValidationError } from 'yup';
+import { ValidationError } from 'yup';
 import * as yup from 'yup';
+import ResponseMessage from '../enums/ResponseMessages';
 
 @Injectable()
 export class YupValidationPipe implements PipeTransform {
@@ -26,7 +27,7 @@ export class YupValidationPipe implements PipeTransform {
       // Check if errors is an array, otherwise wrap it in an array
       const formattedErrors = Array.isArray(errors) ? errors : [errors];
       throw new BadRequestException({
-        message: 'Validation error',
+        message: ResponseMessage.VALIDATION_ERROR,
         errors: this.formatErrors(formattedErrors),
         statusCode: 400,
       });

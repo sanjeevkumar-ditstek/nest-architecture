@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as twilio from 'twilio';
 import { ConfigService } from 'src/config/config.service';
+import ResponseMessage from 'src/common/enums/ResponseMessages';
 
 @Injectable()
 export class SmsService {
@@ -29,6 +30,6 @@ export class SmsService {
       });
     }
 
-    throw new Error('No valid SMS provider configured.');
+    throw new Error(ResponseMessage.NO_SMS_PROVIDER);
   }
 }

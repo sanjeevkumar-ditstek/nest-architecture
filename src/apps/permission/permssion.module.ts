@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
 import { PermissionService } from './permission.service';
 import { PermissionController } from './permission.controller';
-import { User } from '../../db/schemas/user.schema';
+import { User } from '../../db/entity/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Permission } from 'src/db/schemas/permissions.schema';
-import { Role } from 'src/db/schemas/role.schema';
-import { UserRole } from 'src/db/schemas/userRole.schema';
+import { Permission } from 'src/db/entity/permissions.entity';
+import { Role } from 'src/db/entity/role.entity';
+import { UserRole } from 'src/db/entity/userRole.entity';
+import { BaseModel } from 'src/db/entity/base.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Permission, Role, UserRole]),
+    TypeOrmModule.forFeature([User, Permission, Role, UserRole, BaseModel]),
     PassportModule,
     JwtModule.register({
       secret: 'secretKey',

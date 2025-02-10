@@ -18,10 +18,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migrate:up": "ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/migrate-mongo/bin/migrate-mongo up",
-    "migrate:down": "ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/migrate-mongo/bin/migrate-mongo down",
+    "migrate:up": "npx typeorm-ts-node-commonjs migration:run -d src/db/dataSourceLocal.ts",
+   "migrate:down": "npx typeorm-ts-node-commonjs migration:revert -d src/db/dataSourceLocal.ts",
     "seed": "ts-node src/db/seeder/seeder.ts",
-    "prepare": "husky && husky install"
+    "prepare": "husky && husky install",
+    "type": "commonjs"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -69,7 +70,8 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.1",
-    "reflect-metadata": "^0.2.0",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "sequelize": "^6.37.5",
     "sequelize-typescript": "^2.1.6",
@@ -93,7 +95,7 @@
     "@types/jest": "^29.5.2",
     "@types/mongodb": "^4.0.6",
     "@types/multer": "^1.4.12",
-    "@types/node": "^20.3.1",
+    "@types/node": "^20.17.17",
     "@types/passport-apple": "^2.0.3",
     "@types/passport-facebook": "^3.0.3",
     "@types/passport-google-oauth20": "^2.0.16",

@@ -4,9 +4,9 @@ export class CreateUserDto {
   userName: string;
 }
 
-export class UpdateRoleDto {
-  id: string;
-}
+// export class UpdateRoleDto {
+//   id: string;
+// }
 
 export class CreatePermissionDto {
   email: string;

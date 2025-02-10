@@ -1,9 +1,22 @@
+import Modules from "../enums/modules";
+
+
 export interface createUserRequest {
   userName: string;
   email: string;
   password: string;
+  roleId: string;
+  permissionIds:string[];
+
 }
 
+export interface updateUserRequest {
+  userName: string;
+  email: string;
+  password: string;
+  roleId: string;
+  permissionIds:string[];
+}
 export interface loginRequest {
   email: string;
   password: string;
@@ -39,7 +52,7 @@ export interface updateRoleResponse {
 }
 
 export interface createPermssionRequest {
-  module: string;
+  module: string
   action: string;
 }
 
