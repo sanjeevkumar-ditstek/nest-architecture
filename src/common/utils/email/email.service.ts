@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import * as sendgrid from '@sendgrid/mail';
 import { ConfigService } from '../../../config/config.service';
-import * as mjml2html from 'mjml'; 
+import * as mjml2html from 'mjml';
 import ResponseMessage from 'src/common/enums/ResponseMessages';
 
 export enum EmailProvider {
@@ -83,7 +83,6 @@ export class EmailService {
     // Check for errors in MJML conversion
     if (errors.length) {
       throw new Error(`${errors} ${ResponseMessage.MJML}`);
-
     }
 
     if (provider === EmailProvider.SENDGRID) {

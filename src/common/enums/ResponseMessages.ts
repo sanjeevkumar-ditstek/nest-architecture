@@ -26,8 +26,8 @@ enum ResponseMessage {
   UNAUTHORIZED = 'Unauthorized',
   USER_LOGGED_IN = 'User logged in successfully',
 
-  PERMISSION_IN_USE='User is link with this permission.',
-  ROLE_IN_USE='User is link with this role.',
+  PERMISSION_IN_USE = 'User is link with this permission.',
+  ROLE_IN_USE = 'User is link with this role.',
 
   USER_REGISTRATION_ERROR = 'Error in registering user.',
   INVALID_CREDENTIALS = 'Invalid credentials.',
@@ -61,11 +61,11 @@ enum ResponseMessage {
 
   UNSUPPORTED_SOCIAL_PROVIDER = 'Unsupported social provider',
 
-  MJML='MJML conversion error',
-  NO_SMS_PROVIDER='No valid SMS provider configured.',
+  MJML = 'MJML conversion error',
+  NO_SMS_PROVIDER = 'No valid SMS provider configured.',
 
-  VALIDATION_ERROR='Validation error',
-  CONFIG_VALDATION_ERROR='Config validation error'
+  VALIDATION_ERROR = 'Validation error',
+  CONFIG_VALDATION_ERROR = 'Config validation error',
 }
 
 export default ResponseMessage;

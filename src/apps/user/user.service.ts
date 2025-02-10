@@ -26,7 +26,7 @@ export class UserService {
     private permissionRepository: Repository<Permission>,
     @InjectRepository(UserRole)
     private userPermissionRepository: Repository<UserRole>,
-  ) { }
+  ) {}
 
   async create(
     createUserRequest: createUserRequest,
@@ -44,7 +44,7 @@ export class UserService {
       }
       // Check if the role exists
       const existingRole = await this.roleRepository.findOne({
-        where: { id: roleId, isDeleted: false }
+        where: { id: roleId, isDeleted: false },
       });
       if (!existingRole) {
         return { message: ResponseMessage.ROLE_NOT_FOUND };
@@ -55,7 +55,7 @@ export class UserService {
         id: In(permissionIds),
         isDeleted: false,
       });
-      console.log(existingPermission,"existingpermission")
+      console.log(existingPermission, 'existingpermission');
       if (!existingPermission) {
         return { message: ResponseMessage.ROLE_NOT_FOUND };
       }
@@ -73,17 +73,17 @@ export class UserService {
         userName,
       });
       await this.userRepository.save(user);
-  // Assign role & multiple permissions using UserRole entity
-  const userRoles = existingPermission.map((permission) => {
-    return this.userPermissionRepository.create({
-      user,
-      role: existingRole,
-      permission,
-    });
-  });
-console.log(userRoles,"userROL")
-  await this.userPermissionRepository.save(userRoles);
-      return user ;
+      // Assign role & multiple permissions using UserRole entity
+      const userRoles = existingPermission.map((permission) => {
+        return this.userPermissionRepository.create({
+          user,
+          role: existingRole,
+          permission,
+        });
+      });
+      console.log(userRoles, 'userROL');
+      await this.userPermissionRepository.save(userRoles);
+      return user;
     } catch (error) {
       throw new BadRequestException(ResponseMessage.INVALID_CREDENTIALS);
     }
@@ -94,7 +94,7 @@ console.log(userRoles,"userROL")
     updateUserRequest: updateUserRequest,
   ): Promise<User | { message: string }> {
     try {
-      const { userName, email, password, roleId,permissionIds } =
+      const { userName, email, password, roleId, permissionIds } =
         updateUserRequest;
 
       // Check if the user exists
@@ -109,7 +109,7 @@ console.log(userRoles,"userROL")
 
       // Check if the role exists
       const existingRole = await this.roleRepository.findOne({
-        where: {id:roleId , isDeleted: false },
+        where: { id: roleId, isDeleted: false },
       });
 
       if (!existingRole) {
@@ -134,23 +134,23 @@ console.log(userRoles,"userROL")
       //   // Remove existing userRole entries for the user
       //   await this.userPermissionRepository.delete({ user });
 
-        // for (const act of action) {
-        //   const existingPermission = await this.permissionRepository.findOne({
-        //     where: { module, action: act },
-        //   });
+      // for (const act of action) {
+      //   const existingPermission = await this.permissionRepository.findOne({
+      //     where: { module, action: act },
+      //   });
 
-          // if (!existingPermission) {
-          //   return { message: ResponseMessage.PERMISSION_NOT_FOUND };
-          // }
+      // if (!existingPermission) {
+      //   return { message: ResponseMessage.PERMISSION_NOT_FOUND };
+      // }
 
-          // const userRole = this.userPermissionRepository.create({
-          //   user,
-          //   role: existingRole,
-          //   permission: existingPermission,
-          // });
+      // const userRole = this.userPermissionRepository.create({
+      //   user,
+      //   role: existingRole,
+      //   permission: existingPermission,
+      // });
 
-          // await this.userPermissionRepository.save(userRole);
-        // }
+      // await this.userPermissionRepository.save(userRole);
+      // }
       // }
       return user;
     } catch (error) {

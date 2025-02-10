@@ -70,7 +70,6 @@ export class ConfigService {
         then: joi.required(),
       }),
 
-      
       DB_DIALECT: joi
         .string()
         .valid('mysql', 'postgres', 'sqlite', 'mariadb')

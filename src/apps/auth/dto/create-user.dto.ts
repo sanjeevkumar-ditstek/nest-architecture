@@ -5,7 +5,7 @@
 //   userName: string;
 // }
 
-import Modules from "src/common/enums/modules";
+import Modules from 'src/common/enums/modules';
 
 export class CreateUserDto {
   email: string;
@@ -33,7 +33,7 @@ export class UpdateRoleDto {
 }
 
 export class CreatePermissionDto {
-  module: Modules
+  module: Modules;
   action: string;
 }
 

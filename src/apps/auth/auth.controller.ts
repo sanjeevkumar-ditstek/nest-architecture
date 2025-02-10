@@ -60,9 +60,6 @@ export class AuthController {
  * @returns A success message and authentication token if login is successful.
  */
 
-
-
-
 // @Post('social-login')
 // async socialLogin(@Body() body: { provider: string; providerToken: string }) {
 //   const { provider, providerToken } = body;

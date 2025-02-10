@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/db/entity/user.entity';
-require('dotenv').config()
+require('dotenv').config();
 import { Permission } from 'src/db/entity/permissions.entity';
 import { UserRole } from 'src/db/entity/userRole.entity';
 import * as jwt from 'jsonwebtoken';
@@ -25,7 +25,7 @@ export class RolesGuard implements CanActivate {
     private readonly userRoleRepository: Repository<UserRole>,
     @InjectRepository(Permission)
     private readonly permissionRepository: Repository<Permission>,
-  ) { }
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
@@ -41,7 +41,10 @@ export class RolesGuard implements CanActivate {
     let decoded;
 
     try {
-      console.log('process.env.WEBTOKEN_SECRET_KEY: ', process.env.WEBTOKEN_SECRET_KEY);
+      console.log(
+        'process.env.WEBTOKEN_SECRET_KEY: ',
+        process.env.WEBTOKEN_SECRET_KEY,
+      );
       // decoded = this.jwtService.verify(token, { secret: 'SECRET_KEY'});\
       decoded = this.jwtService.verify(token, { secret: 'secretKey' });
     } catch (error) {
@@ -104,4 +107,3 @@ export class RolesGuard implements CanActivate {
     return true;
   }
 }
-

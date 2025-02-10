@@ -33,8 +33,14 @@ export class RoleController {
   @Post()
   @SetMetadata('roles', [Roles.SUPER_ADMIN])
   @ApiOperation({ summary: 'create a new role' })
-  @ApiResponse({ status:StatusCodeEnum.OK, description: ResponseMessage.ROLE_CREATED })
-  @ApiResponse({ status: StatusCodeEnum.BAD_REQUEST, description: ResponseMessage.BAD_REQUEST })
+  @ApiResponse({
+    status: StatusCodeEnum.OK,
+    description: ResponseMessage.ROLE_CREATED,
+  })
+  @ApiResponse({
+    status: StatusCodeEnum.BAD_REQUEST,
+    description: ResponseMessage.BAD_REQUEST,
+  })
   @UsePipes(new YupValidationPipe(createRoleSchema))
   async register(@Body() createRoleDto: CreateRoleDto) {
     return this.roleService.createRole(createRoleDto);
@@ -50,8 +56,14 @@ export class RoleController {
   @Put(':id')
   @SetMetadata('roles', [Roles.SUPER_ADMIN])
   @ApiOperation({ summary: ' role user details' })
-  @ApiResponse({ status: StatusCodeEnum.OK, description: ResponseMessage.ROLE_CREATED})
-  @ApiResponse({ status: StatusCodeEnum.BAD_REQUEST, description: ResponseMessage.BAD_REQUEST })
+  @ApiResponse({
+    status: StatusCodeEnum.OK,
+    description: ResponseMessage.ROLE_CREATED,
+  })
+  @ApiResponse({
+    status: StatusCodeEnum.BAD_REQUEST,
+    description: ResponseMessage.BAD_REQUEST,
+  })
   @UsePipes(new YupValidationPipe(updateRoleSchema))
   async updateUser(
     @Param('id') id: string,
@@ -68,8 +80,14 @@ export class RoleController {
   @Delete(':id')
   @SetMetadata('roles', [Roles.SUPER_ADMIN])
   @ApiOperation({ summary: 'Soft delete a user' })
-  @ApiResponse({ status: StatusCodeEnum.OK, description: ResponseMessage.ROLE_UPDATED })
-  @ApiResponse({ status: StatusCodeEnum.BAD_REQUEST, description: ResponseMessage.BAD_REQUEST })
+  @ApiResponse({
+    status: StatusCodeEnum.OK,
+    description: ResponseMessage.ROLE_UPDATED,
+  })
+  @ApiResponse({
+    status: StatusCodeEnum.BAD_REQUEST,
+    description: ResponseMessage.BAD_REQUEST,
+  })
   async softDeleteUser(@Param('id') id: string) {
     return await this.roleService.softDeleteRole(id);
   }
@@ -82,8 +100,14 @@ export class RoleController {
   @Get()
   @SetMetadata('roles', [Roles.SUPER_ADMIN])
   @ApiOperation({ summary: 'Get users with pagination, search, and filters' })
-  @ApiResponse({ status: StatusCodeEnum.OK, description: ResponseMessage.GET_ROLE})
-  @ApiResponse({ status: StatusCodeEnum.BAD_REQUEST, description: ResponseMessage.BAD_REQUEST })
+  @ApiResponse({
+    status: StatusCodeEnum.OK,
+    description: ResponseMessage.GET_ROLE,
+  })
+  @ApiResponse({
+    status: StatusCodeEnum.BAD_REQUEST,
+    description: ResponseMessage.BAD_REQUEST,
+  })
   async getUsers(
     @Query()
     query: FindUserDto,
@@ -97,11 +121,17 @@ export class RoleController {
    * @returns The role details.
    */
   @Get(':id')
-  @SetMetadata('roles', [Roles.ADMIN,Roles.SUPER_ADMIN])
+  @SetMetadata('roles', [Roles.ADMIN, Roles.SUPER_ADMIN])
   @SetMetadata('module', [Modules.PERMISSION])
   @ApiOperation({ summary: 'Get user by ID' })
-  @ApiResponse({ status:StatusCodeEnum.OK, description: ResponseMessage.GET_ROLE})
-  @ApiResponse({ status: StatusCodeEnum.BAD_REQUEST, description: ResponseMessage.BAD_REQUEST})
+  @ApiResponse({
+    status: StatusCodeEnum.OK,
+    description: ResponseMessage.GET_ROLE,
+  })
+  @ApiResponse({
+    status: StatusCodeEnum.BAD_REQUEST,
+    description: ResponseMessage.BAD_REQUEST,
+  })
   async getUserById(@Param('id') id: string) {
     return this.roleService.getById(id);
   }

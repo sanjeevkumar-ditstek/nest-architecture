@@ -24,4 +24,3 @@ export class Users1738730837114 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE \`users\``);
   }
 }
-

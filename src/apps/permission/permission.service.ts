@@ -40,7 +40,7 @@ export class PermissionService {
     try {
       const { module, action } = createpermissionnRequest;
       const existingPermission = await this.permissionRepository.findOne({
-        where: { action , module }
+        where: { action, module },
       });
       if (existingPermission) {
         return { message: ResponseMessage.PERMISSION_ALREADY_EXISTS };
@@ -99,14 +99,14 @@ export class PermissionService {
         return { message: ResponseMessage.PERMISSION_NOT_FOUND };
       }
 
-        // Check if the permissionId is linked to any userRole
-    const userRole = await this.rolePermissionRepository.findOne({
-      where: { permission},
-    });
+      // Check if the permissionId is linked to any userRole
+      const userRole = await this.rolePermissionRepository.findOne({
+        where: { permission },
+      });
 
-    if (userRole) {
-      return { message: ResponseMessage.PERMISSION_IN_USE };
-    }
+      if (userRole) {
+        return { message: ResponseMessage.PERMISSION_IN_USE };
+      }
       permission.isDeleted = true;
       await this.permissionRepository.save(permission);
       return {

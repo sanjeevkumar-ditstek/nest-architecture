@@ -13,7 +13,8 @@ import { UserRole } from 'src/db/entity/userRole.entity';
 export class RoleService {
   constructor(
     @InjectRepository(Role) private roleRepository: Repository<Role>,
-    @InjectRepository(UserRole) private userRoleRepository: Repository<UserRole>,
+    @InjectRepository(UserRole)
+    private userRoleRepository: Repository<UserRole>,
   ) {}
 
   /**
@@ -87,14 +88,14 @@ export class RoleService {
         throw new BadRequestException(ResponseMessage.ROLE_NOT_FOUND);
       }
 
-        // Check if the permissionId is linked to any userRole
-        const userRole = await this.userRoleRepository.findOne({
-          where: {role},
-        });
-    
-        if (userRole) {
-          return { message: ResponseMessage.PERMISSION_IN_USE };
-        }
+      // Check if the permissionId is linked to any userRole
+      const userRole = await this.userRoleRepository.findOne({
+        where: { role },
+      });
+
+      if (userRole) {
+        return { message: ResponseMessage.PERMISSION_IN_USE };
+      }
       role.isDeleted = true; // Set the isDeleted flag to true
       await this.roleRepository.save(role); // Save the updated role
 

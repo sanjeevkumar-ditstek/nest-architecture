@@ -1,5 +1,24 @@
-import {Controller,UseGuards,SetMetadata,Post,Body,Version,UsePipes,Put,Param,Delete,Get, Query, ParseUUIDPipe,} from '@nestjs/common';
-import {ApiBearerAuth,ApiOperation,ApiResponse, ApiTags,} from '@nestjs/swagger';
+import {
+  Controller,
+  UseGuards,
+  SetMetadata,
+  Post,
+  Body,
+  Version,
+  UsePipes,
+  Put,
+  Param,
+  Delete,
+  Get,
+  Query,
+  ParseUUIDPipe,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import Roles from 'src/common/enums/role';
 import Permissions from 'src/common/enums/permission';
 import Modules from 'src/common/enums/modules';
@@ -36,12 +55,13 @@ export class UserController {
    */
   @Version('1')
   @Post()
-  @SetMetadata('roles', [Roles.ADMIN,Roles.SUPER_ADMIN,Roles.USER])
+  @SetMetadata('roles', [Roles.ADMIN, Roles.SUPER_ADMIN, Roles.USER])
   @SetMetadata('module', [Modules.USER])
-  @SetMetadata('permissions', [Permissions.READ,Permissions.UPDATE])
+  @SetMetadata('permissions', [Permissions.READ, Permissions.UPDATE])
   @ApiOperation({ summary: 'Register a new user' })
-  @ApiResponse({ status: StatusCodeEnum.CREATED,
-   description: ResponseMessage.USER_CREATED,
+  @ApiResponse({
+    status: StatusCodeEnum.CREATED,
+    description: ResponseMessage.USER_CREATED,
   })
   @ApiResponse({
     status: StatusCodeEnum.BAD_REQUEST,
@@ -58,7 +78,7 @@ export class UserController {
    * using the Yup validation schema `updateSchema`.
    */
   @Put(':id')
-  @SetMetadata('roles', [Roles.ADMIN,Roles.SUPER_ADMIN,Roles.USER])
+  @SetMetadata('roles', [Roles.ADMIN, Roles.SUPER_ADMIN, Roles.USER])
   @SetMetadata('module', [Modules.USER])
   @SetMetadata('permissions', [Permissions.UPDATE])
   @ApiOperation({ summary: 'Update user details, role, and permissions' })
@@ -84,7 +104,7 @@ export class UserController {
    * This endpoint allows soft deletion of a user, marking them as deleted in the database.
    */
   @Delete(':id')
-  @SetMetadata('roles', [Roles.ADMIN,Roles.SUPER_ADMIN])
+  @SetMetadata('roles', [Roles.ADMIN, Roles.SUPER_ADMIN])
   @SetMetadata('module', [Modules.USER])
   @SetMetadata('permissions', [Permissions.DELETE])
   @ApiOperation({ summary: 'Soft delete user by ID' })
@@ -106,7 +126,7 @@ export class UserController {
    * It supports queries like search terms and custom filters.
    */
   @Get()
-  @SetMetadata('roles', [Roles.ADMIN,Roles.SUPER_ADMIN,Roles.USER])
+  @SetMetadata('roles', [Roles.ADMIN, Roles.SUPER_ADMIN, Roles.USER])
   @SetMetadata('module', [Modules.USER])
   @SetMetadata('permissions', [Permissions.READ])
   @ApiOperation({ summary: 'Get users with pagination, search, and filters' })

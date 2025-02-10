@@ -1,16 +1,27 @@
 import {
-  Controller,Post,Body,UsePipes,Delete,Param,Put,Get,
+  Controller,
+  Post,
+  Body,
+  UsePipes,
+  Delete,
+  Param,
+  Put,
+  Get,
   SetMetadata,
 } from '@nestjs/common';
 import { PermissionService } from './permission.service';
 import {
   CreatePermissionDto,
-  UpdatePermissionDto} from '../auth/dto/create-user.dto';
+  UpdatePermissionDto,
+} from '../auth/dto/create-user.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { YupValidationPipe } from 'src/common/validations/yup-validation.pipe';
 import { Query } from '@nestjs/common';
 import { FindPermissionDto } from './dto/find-permission.dto';
-import { createPermissionSchema,updatePermissionSchema } from './schema/permission.schema';
+import {
+  createPermissionSchema,
+  updatePermissionSchema,
+} from './schema/permission.schema';
 import ResponseMessage from 'src/common/enums/ResponseMessages';
 import StatusCodeEnum from 'src/common/enums/StatusCodeEnum';
 import Roles from 'src/common/enums/role';
@@ -75,8 +86,14 @@ export class PermissionController {
   @Delete(':id')
   @SetMetadata('roles', [Roles.SUPER_ADMIN])
   @ApiOperation({ summary: 'Soft delete a user' })
-  @ApiResponse({ status: StatusCodeEnum.OK, description: ResponseMessage.PERMISSION_SOFT_DELETED })
-  @ApiResponse({status: StatusCodeEnum.BAD_REQUEST,description: ResponseMessage.BAD_REQUEST})
+  @ApiResponse({
+    status: StatusCodeEnum.OK,
+    description: ResponseMessage.PERMISSION_SOFT_DELETED,
+  })
+  @ApiResponse({
+    status: StatusCodeEnum.BAD_REQUEST,
+    description: ResponseMessage.BAD_REQUEST,
+  })
   async softDeleteUser(@Param('id') id: string) {
     return await this.permissionService.softDelete(id);
   }

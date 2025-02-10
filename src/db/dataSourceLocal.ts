@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 import { DataSourceOptions } from 'typeorm/data-source/DataSourceOptions';
-require('dotenv').config()
-console.log(process.env.DB_DATABASE,"FDGYHIJO")
+require('dotenv').config();
+console.log(process.env.DB_DATABASE, 'FDGYHIJO');
 let connectionOptions: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,

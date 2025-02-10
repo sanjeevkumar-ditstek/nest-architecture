@@ -40,7 +40,7 @@ const seedDatabase = async () => {
         id: uuidv4(),
         email: 'superadmin@example.com',
         password: await hashPassword('superadmin_password'),
-        isSuperAdmin:true
+        isSuperAdmin: true,
       },
       {
         id: uuidv4(),
